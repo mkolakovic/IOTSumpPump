@@ -275,7 +275,7 @@ uint32_t ReadInput(void)
 
     sw3_debounced = 0;
 
-    for(i=0; i<5; i++) // read 100 times, no false alarm wanted here
+    for(i=0; i<100; i++) // read 100 times, no false alarm wanted here
     {
         sw3 = MAP_GPIOPinRead(GPIOA1_BASE, GPIO_PIN_5); // read pin
         sw3 = (sw3 > 5) & 0x01; // shift value
