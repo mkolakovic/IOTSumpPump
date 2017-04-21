@@ -446,7 +446,6 @@ int32_t SendEmail(char * msg)
     if(lRetVal < 0)
     {
         DBG_PRINT("Failed to start SimpleLink Device\n\r");
-        LOOP_FOREVER();
     }
     //***********************************************************************//
     //Set Default Parameters for Email
@@ -455,7 +454,6 @@ int32_t SendEmail(char * msg)
     if(lRetVal < 0)
     {
         DBG_PRINT("Failed to set default params for Email\r\n");
-        LOOP_FOREVER();
     }
     //***********************************************************************//
     // Connect to AP
