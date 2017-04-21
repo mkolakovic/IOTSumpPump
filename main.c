@@ -25,7 +25,7 @@
 // Application Name     - IOT Sump_Pump
 // Application Overview - The IOT Sump Pump application on the CC3200 sends emails
 //                        using SMTP (Simple Mail Transfer Protocol) upon detecting
-//                        GPIO13 switching LOW or Vbat <2.4V.
+//                        GPIO13 switching High or Vbat <2.4V.
 // Tool-chain           - CCS 7 & CC3200 SDK 1.2
 //*****************************************************************************
 
