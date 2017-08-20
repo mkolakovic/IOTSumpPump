@@ -69,7 +69,7 @@
 #define DEFAULT_WAKEUP       (8*60*60) // 8 hours
 #define EMERGENCY_WAKEUP     (30*60)   // 30 minutes
 #define NO_OF_ADC_SAMPLES    15
-#define LOW_VOLTAGE          2400 // in mV = 2.4V
+#define LOW_VOLTAGE          2700 // in mV = 2.7V
 #define AP_CONNECT_ERROR     -1
 #define EMAIL_SEND_ERROR     -2
 
