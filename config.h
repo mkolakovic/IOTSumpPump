@@ -25,8 +25,8 @@
 /********************************************************************************
     AP connection
 ********************************************************************************/
-#define SSID_NAME               "net"                 // AP SSID
-#define MY_SECURITY_TYPE         SL_SEC_TYPE_WPA_WPA2   // Security type (OPEN or WEP or WPA)
+#define MY_SSID_NAME            "net"                 // AP SSID
+#define MY_SECURITY_TYPE        SL_SEC_TYPE_WPA_WPA2   // Security type (OPEN or WEP or WPA)
 #define SECURITY_KEY            "net pass"          // secured AP PAssword
 
 
