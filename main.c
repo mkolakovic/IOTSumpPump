@@ -25,7 +25,7 @@
 // Application Name     - IOT Sump_Pump
 // Application Overview - The IOT Sump Pump application on the CC3200 sends emails
 //                        using SMTP (Simple Mail Transfer Protocol) upon detecting
-//                        GPIO13 switching High or Vbat <2.4V.
+//                        GPIO13 switching High or Vbat <2.8V.
 // Tool-chain           - CCS 7 & CC3200 SDK 1.2
 //*****************************************************************************
 
@@ -61,6 +61,12 @@
 #include "config.h"
 
 // ----------------------------------------------------------------------------
+/*
+    IOT_SUMP_PUMP // compiler flag used to disable AP re-connect "while"
+    loop in network_if.h defined in CCS Project Properties tab
+    TODO: using flag above, modify /ti/CC3200SDK_1.2.0/cc3200-sdk/example/common/network_if.c
+    to disable connection re-try strategy and terminate with error (-1)
+*/
 #define DELAY_1MS            8000
 #define DELAY_1SEC           8000000
 #define SLOW_CLK_FREQ        (32*1024)
@@ -460,7 +466,7 @@ int32_t SendEmail(char * msg)
     //
     if(!IS_CONNECTED(Network_IF_CurrentMCUState()))
     {
-        lRetVal = Network_IF_ConnectAP(SSID_NAME,SecurityParams);
+        lRetVal = Network_IF_ConnectAP(MY_SSID_NAME,SecurityParams);
         if(lRetVal < 0)
         {
            DBG_PRINT("Error: %d Connecting to an AP.\n\r",lRetVal);
