@@ -1,4 +1,4 @@
-# This is still work in progress!
+# Work in progress!
 #
 # This will get published in February 2018 issue of Nuts&Volts Magazine
 
@@ -41,6 +41,7 @@ To avoid utilizing third-party servers/gateways to send an email or text, I use 
 
 
 
+![Alt Text](/img/iot.png)
 
 Figure-2. Project Big Picture
 
