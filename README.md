@@ -10,7 +10,7 @@ My campaign against infiltrating water began when I moved to a location with a h
     
 Although the device described here will send a text as a sump pump warning, this project applies to pretty much anything with an appropriate sensor. An open door or window, a tripped laser beam, a pressure change on a pressure plate, a proximity sensor, etc. could all be converted into a text message warning. 
 
-#Project Overview
+# Project Overview
 
 My goal for this project was to design a device that will monitor the sump pump water level and text me if the water level gets too high. The device design parameters included: must be battery powered, have Wi-Fi capability, and have the ability to send an email or text. I chose to go with Texas Instruments CC3200 LaunchPad, which is the evaluation board for CC3200 Wi-Fi wireless MCU. LaunchPad comes with a built in in-circuit debugger, LEDs, switches, sensors, and two 20-pin connectors.
 
@@ -22,7 +22,7 @@ The entire design runs off of two AA batteries. To limit the load current and ex
 ![Alt Text](/img/iot_SumpPump.png)
 Figure-1. IoT Sump Pump
 
-#Email to Text
+# Email to Text
 
 To avoid utilizing third-party servers/gateways to send an email or text, I use CC3200 SDK and my Gmail account to send the text. The way it works is that on CC3200, I run a SMTP client that connects to my Gmail account. Once connected, it sends an email message to my mobile carrier’s SMS gateway, which sits on the mobile network that delivers the message. All you need is a phone number and a SMS gateway domain name. In my case, the Verizon SMS gateway domain is vtext.com.  So I send an email to 1234567890@vtext.com, where 1234567890 is my phone number. All email and Wi-Fi settings for the project are stored in ‘config.h’ file.
 
@@ -46,7 +46,7 @@ To avoid utilizing third-party servers/gateways to send an email or text, I use 
 Figure-2. Project Big Picture
 
 
-#Hardware Design
+# Hardware Design
 
 CC3200 is a SoC that consists of an ARM M4F core for application software processing, SimpleLink (the Wi-Fi network processor subsystem), 256 kB RAM, and peripherals. SimpleLink has its own dedicated ARM MCU that completely off loads the application MCU. It also includes 802.11bgn Radio and a TCP/IP Stack. This arrangement simplifies development significantly.
 
@@ -61,7 +61,7 @@ CC3200 is a SoC that consists of an ARM M4F core for application software proces
 
 
 
-
+![Alt Text](/img/cc3200_hw.png)
 Figure-3. CC3200 Hardware Overview
 
 
@@ -81,7 +81,7 @@ The application MCU runs at 80MHz. User code and user files are stored in an ext
 
 
 
-
+![Alt Text](/img/block-diag.jpg)
 Figure-4. CC3200 Functional Block Diagram
 
 There are only a few minor modifications needed for LaunchPad:
@@ -102,7 +102,7 @@ The CC3200 internal sampling cap is 12pF and it is switched on for 400ns.  So a 
  
 
 
-
+![Alt Text](/img/LT-pin58.png)
 Figure-5. Voltage on the sampling capacitor with and without external capacitor in the voltage divider
 
 Also, I knowingly compromised the voltage range measurement and bandwidth. This means the A2D input will get full scale when the battery voltage is 2.9V. Also, the voltage change on the pin will be slower. In this application, that did not matter since I was only interested in a low point in the battery voltage range. If the battery voltage dips below 2.4V, a text will go out as a warning to replace the batteries. Assuming two AA batteries, not at full capacity, and average load current about six times higher than expected, the batteries should last well over a year:  2000mAh/0.1mA = 20000h ~ 833 days.
@@ -111,7 +111,7 @@ Whenever the reed switch input is sampled, it is also debounced. The pin is pool
 
 To preserve the batteries, the device is kept in Hibernate mode. In this state, most of the SoC is powered down except the RTC and 2x32-bit OCR registers. Before hibernating, the software enables two wake up sources: RTC (every 8 hours) and GPIO#13. The reed switch and LaunchPad switch SW3 are both connected to GPIO#13.  Upon wakeup, the core resumes its execution in the ROM bootloader. While hibernating, the measured current out of the battery was close to 8uA.
 
-#Software Design
+# Software Design
 
 The software development was done using CCS - Code Composer Studio, a free IDE with compiler/debugger. CCS is a very powerful tool, but it takes some time to get to know it. There are lots of videos on CCS on the web, so I won’t go into details on how to use it here.
 
@@ -142,11 +142,11 @@ If the sump pump gets fixed by the time the board wakes up, then everything cont
 
 
 
-
+![Alt Text](/img/iot_sump_flow.png)
 Figure-6. Code Flow
 
 
-#Additional Considerations
+# Additional Considerations
 
 A SMTP client is part of CC3200 SDK and it will create a socket, connect, authenticate, create and send packets to a SMTP server for you. I won’t go into details on how the SMTP protocol works here, but there is an excellent “Email” example included with SDK. Also, you should check out the original SMTP spec created in 1982, RFC 821.
 
@@ -158,7 +158,7 @@ Now for the real-world problems: try not to place the board too close to the pum
 
 Another issue is running the reed switch cable in parallel and next to the power cable. This could cause high voltage transients from the pump power cable to couple to the reed switch cable. Since there is no TVS on the CC3200 reed switch input, transient could potentially damage the SoC. A TVS on the reed switch input is something I am definitely planning on adding to this project.
 
-
+![Alt Text](/img/ccs.png)
 Figure-7. Code Composer Studio 7 IDE Debug Session
 
 
@@ -168,7 +168,7 @@ So go ahead and see a movie, or meet a friend for coffee.  Even if its pouring o
 
 
 
-#References:
+# References:
 
 http://www.ti.com/tool/cc3200modlaunchxl
 http://www.ti.com/lit/ds/swrs166/swrs166.pdf
