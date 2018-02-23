@@ -1,6 +1,6 @@
 # Work in progress!
 #
-# This will get published in February 2018 issue of Nuts&Volts Magazine
+# Published in February 2018 issue of Nuts&Volts Magazine
 
 
 # IOTSumpPump
@@ -165,8 +165,20 @@ Figure-7. Code Composer Studio 7 IDE Debug Session
 So go ahead and see a movie, or meet a friend for coffee.  Even if its pouring outside. Because if your pump decides to dump, you’ll get a text warning. And since you can save the day from there on out, there will be no flood. And all of the awesome stuff that you’ve got in the basement will be just fine. 
 
 
+# Addendum
+
+After deploying the device and observing for three months, it was noted that the red LED on the CC3200 board would occasionally turn on at the moment the sump pump turned off. This indicated that the board went through the POR due to an active wakeup input. As expected, the EMI blast from the pump was coupling on the input wire and generating a wakeup. Since the software debouncing is relatively long, the device would ignore this event and go back to hibernation. However, this could significantly impact battery life.
+
+In any case, it is not good practice to have the input go directly to the microcontroller pin, so it was decided to add a RC filter to the input and see if that alleviated the problem before testing other ideas (TVS, ferrites, etc.). Adding 10nF, 100nF, and 1kOhm in pi configuration to the input (see schematic below) indeed did solve the issue. This would have been an appropriate addition in the initial design.
+
+Also, the Low Voltage threshold has been increased to 2.75V in order to ensure that there is enough charge left in the batteries to power up the radio and network core to get the message out.
+
+![Alt Text](/img/iot_sp_sw3_filter_schem.png)
+Figure-8. RC filter was added to the wake-up input.
 
 
+![Alt Text](/img/filter.jpg)
+Figure-9. RC filter components were added to the bottom side of the PCB in the SW3 area.
 
 # References:
 
