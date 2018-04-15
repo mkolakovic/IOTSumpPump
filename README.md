@@ -1,10 +1,6 @@
-# Work in progress!
-#
+# IoT Sump Pump
+
 # Published in February 2018 issue of Nuts&Volts Magazine
-
-
-# IOTSumpPump
-
 
 My campaign against infiltrating water began when I moved to a location with a higher water table that required the assistance of a sump pump to keep water out of the basement. This is particularly worrisome during the snow melts and heavy rains of the spring.  As every sump pump will one day expire, backup systems are needed to prevent basement flooding. The device I created provides a first line of defense against a flood.  It will alert the user via text message that the water level has risen above the sump pump’s maximum level thereby indicating a pump failure. This alert could potentially enable the user to return home and drop in a replacement pump prior to any flooding occurring.
     
