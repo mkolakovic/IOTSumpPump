@@ -72,10 +72,10 @@
 #define SLOW_CLK_FREQ        (32*1024)
 #define SW_ON                1
 #define SW_OFF               0
-#define DEFAULT_WAKEUP       (18*60*60) // 18 hours
+#define DEFAULT_WAKEUP       (24*60*60) // every 24 hours
 #define EMERGENCY_WAKEUP     (60*60)   // 60 minutes
 #define NO_OF_ADC_SAMPLES    15
-#define LOW_VOLTAGE          2600 // in mV = 2.6V
+#define LOW_VOLTAGE          2690 // in mV = 2.69V
 #define AP_CONNECT_ERROR     -1
 #define EMAIL_SEND_ERROR     -2
 
@@ -246,7 +246,7 @@ static void BoardInit(void)
     //
     // Configure the HIB module RTC wake time and GPIO
     //
-    MAP_PRCMHibernateIntervalSet(DEFAULT_WAKEUP * SLOW_CLK_FREQ);
+    MAP_PRCMHibernateIntervalSet((unsigned long long)DEFAULT_WAKEUP * SLOW_CLK_FREQ);
     MAP_PRCMHibernateWakeUpGPIOSelect(PRCM_HIB_GPIO13, PRCM_HIB_HIGH_LEVEL);
     //
     // Enable the HIB RTC and GPIO (HIBERNATE MODE)
